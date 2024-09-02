@@ -45,8 +45,8 @@ const Table = ({ onCreateUserClick }) => {
 
   return (
     <div className="p-4">
-      <div className="flex justify-between items-center mb-4 space-x-2">
-        <div className="flex space-x-2">
+      <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-4 space-y-4 sm:space-y-0 sm:space-x-2">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
           <button className="p-2 bg-gray-200 border rounded">List</button>
           <button
             onClick={onCreateUserClick}
@@ -55,20 +55,22 @@ const Table = ({ onCreateUserClick }) => {
             Create User
           </button>
         </div>
-        <button
-          onClick={downloadExcel}
-          className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 border"
-        >
-          Download
-        </button>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border rounded flex-grow"
-        />
-        <button className="p-2 bg-gray-200 border rounded">Show All</button>
+        <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+          <button
+            onClick={downloadExcel}
+            className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 border"
+          >
+            Download
+          </button>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="p-2 border rounded flex-grow"
+          />
+          <button className="p-2 bg-gray-200 border rounded">Show All</button>
+        </div>
       </div>
 
       <div className="overflow-x-auto">
@@ -100,8 +102,8 @@ const Table = ({ onCreateUserClick }) => {
         </table>
       </div>
 
-      <div className="flex justify-between items-center mt-4">
-        <div className="flex space-x-2">
+      <div className="flex flex-col items-center mt-4 space-y-2 sm:space-y-0 sm:flex-row sm:justify-between">
+        <div className="flex flex-wrap justify-center space-x-2">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
@@ -118,5 +120,3 @@ const Table = ({ onCreateUserClick }) => {
 };
 
 export default Table;
-
-
