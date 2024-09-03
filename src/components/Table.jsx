@@ -44,21 +44,23 @@ const Table = ({ onCreateUserClick }) => {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="p-4">
-      <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-4 space-y-4 sm:space-y-0 sm:space-x-2">
-        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-          <button className="p-2 bg-gray-200 border rounded">List</button>
+    <div className="p-6 bg-white rounded-lg shadow-lg">
+      <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-6">
+        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <button className="p-3 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 transition duration-300 ease-in-out">
+            List
+          </button>
           <button
             onClick={onCreateUserClick}
-            className="p-2 bg-blue-500 text-white border rounded"
+            className="p-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out"
           >
             Create User
           </button>
         </div>
-        <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button
             onClick={downloadExcel}
-            className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 border"
+            className="p-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out"
           >
             Download
           </button>
@@ -67,21 +69,23 @@ const Table = ({ onCreateUserClick }) => {
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 border rounded flex-grow"
+            className="p-3 border border-gray-300 rounded-lg shadow-sm flex-grow focus:ring-2 focus:ring-blue-400 transition duration-300 ease-in-out"
           />
-          <button className="p-2 bg-gray-200 border rounded">Show All</button>
+          <button className="p-3 bg-yellow-600 text-white rounded-lg shadow-md hover:bg-yellow-700 transition duration-300 ease-in-out">
+            Show All
+          </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse border">
-          <thead>
+      <div className="overflow-x-auto bg-gray-50 rounded-lg shadow-lg">
+        <table className="min-w-full border-collapse">
+          <thead className="bg-gray-100 border-b">
             <tr>
               {Object.keys(data[0]).map((key) => (
                 <th
                   key={key}
                   onClick={() => requestSort(key)}
-                  className="border p-2 cursor-pointer bg-gray-100 hover:bg-gray-200"
+                  className="border p-3 text-left cursor-pointer hover:bg-gray-200 transition duration-300 ease-in-out"
                 >
                   {key} {sortConfig && sortConfig.key === key && (
                     sortConfig.direction === 'ascending' ? '↑' : '↓'
@@ -92,9 +96,9 @@ const Table = ({ onCreateUserClick }) => {
           </thead>
           <tbody>
             {paginatedData.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-100">
+              <tr key={index} className="hover:bg-gray-100 transition duration-300 ease-in-out">
                 {Object.values(item).map((val, i) => (
-                  <td key={i} className="border p-2">{val}</td>
+                  <td key={i} className="border p-3">{val}</td>
                 ))}
               </tr>
             ))}
@@ -102,13 +106,13 @@ const Table = ({ onCreateUserClick }) => {
         </table>
       </div>
 
-      <div className="flex flex-col items-center mt-4 space-y-2 sm:space-y-0 sm:flex-row sm:justify-between">
-        <div className="flex flex-wrap justify-center space-x-2">
+      <div className="flex flex-col items-center mt-6">
+        <div className="flex space-x-2">
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
               onClick={() => handlePageChange(page)}
-              className={`p-2 border rounded ${currentPage === page ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+              className={`p-3 rounded-lg shadow-md transition duration-300 ease-in-out ${currentPage === page ? 'bg-blue-600 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
             >
               {page}
             </button>
@@ -120,3 +124,5 @@ const Table = ({ onCreateUserClick }) => {
 };
 
 export default Table;
+
+

@@ -1,139 +1,135 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addData } from '../features/tableDataSlice';
 
-const Form = () => {
+const Form = ({ onClose }) => {
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    website: '',
-    Industry: '',
-    Account_Status: '',
-    Remark: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addData(formData));
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      website: '',
-      Industry: '',
-      Account_Status: '',
-      Remark: '',
-    });
+  const onSubmit = (data) => {
+    dispatch(addData(data));
+    reset();
+    onClose(); // Close the form after submission
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-8 p-6 bg-white rounded shadow-lg">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Create User</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Enter your name"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Phone</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Enter your phone number"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Website</label>
-          <input
-            type="text"
-            name="website"
-            value={formData.website}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Enter your website"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Industry</label>
-          <input
-            type="text"
-            name="Industry"
-            value={formData.Industry}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Enter your industry"
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700">Account Status</label>
-          <input
-            type="text"
-            name="Account_Status"
-            value={formData.Account_Status}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Enter your account status"
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700">Remark</label>
-          <input
-            type="text"
-            name="Remark"
-            value={formData.Remark}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            placeholder="Enter your remark"
-            required
-          />
-        </div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+      <div className="w-full max-w-4xl mx-auto p-8 bg-gray-800 text-white rounded-lg shadow-lg relative">
         <button
-          type="submit"
-          className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="absolute top-4 right-4 text-white text-xl"
+          onClick={onClose}
         >
-          Submit
+          &times;
         </button>
-      </form>
+        <h2 className="text-3xl font-bold mb-6 text-center">Create User</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-4">
+            <label className="block text-gray-300 font-semibold">Name</label>
+            <input
+              type="text"
+              {...register('name', { required: true })}
+              className={`w-full p-3 border-2 ${
+                errors.name ? 'border-red-500' : 'border-transparent'
+              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500`}
+              placeholder="Enter your name"
+            />
+            {errors.name && <p className="text-red-500 text-sm mt-1">Name is required</p>}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-300 font-semibold">Email</label>
+            <input
+              type="email"
+              {...register('email', { required: true })}
+              className={`w-full p-3 border-2 ${
+                errors.email ? 'border-red-500' : 'border-transparent'
+              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              placeholder="Enter your email"
+            />
+            {errors.email && <p className="text-red-500 text-sm mt-1">Email is required</p>}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-300 font-semibold">Phone</label>
+            <input
+              type="text"
+              {...register('phone', { required: true })}
+              className={`w-full p-3 border-2 ${
+                errors.phone ? 'border-red-500' : 'border-transparent'
+              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-green-500`}
+              placeholder="Enter your phone number"
+            />
+            {errors.phone && <p className="text-red-500 text-sm mt-1">Phone is required</p>}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-300 font-semibold">Website</label>
+            <input
+              type="text"
+              {...register('website', { required: true })}
+              className={`w-full p-3 border-2 ${
+                errors.website ? 'border-red-500' : 'border-transparent'
+              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+              placeholder="Enter your website"
+            />
+            {errors.website && <p className="text-red-500 text-sm mt-1">Website is required</p>}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-300 font-semibold">Industry</label>
+            <input
+              type="text"
+              {...register('Industry', { required: true })}
+              className={`w-full p-3 border-2 ${
+                errors.Industry ? 'border-red-500' : 'border-transparent'
+              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-500`}
+              placeholder="Enter your industry"
+            />
+            {errors.Industry && <p className="text-red-500 text-sm mt-1">Industry is required</p>}
+          </div>
+
+          <div className="mb-6">
+            <label className="block text-gray-300 font-semibold">Account Status</label>
+            <input
+              type="text"
+              {...register('Account_Status', { required: true })}
+              className={`w-full p-3 border-2 ${
+                errors.Account_Status ? 'border-red-500' : 'border-transparent'
+              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500`}
+              placeholder="Enter your account status"
+            />
+            {errors.Account_Status && <p className="text-red-500 text-sm mt-1">Account Status is required</p>}
+          </div>
+
+          <div className="mb-6">
+            <label className="block text-gray-300 font-semibold">Remark</label>
+            <input
+              type="text"
+              {...register('Remark', { required: true })}
+              className={`w-full p-3 border-2 ${
+                errors.Remark ? 'border-red-500' : 'border-transparent'
+              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-500`}
+              placeholder="Enter your remark"
+            />
+            {errors.Remark && <p className="text-red-500 text-sm mt-1">Remark is required</p>}
+          </div>
+
+          <button
+            type="submit"
+            className="col-span-full w-full p-3 bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-lg shadow-md hover:from-gray-600 hover:to-gray-800 mt-6 transition-all duration-300"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default Form;
+
