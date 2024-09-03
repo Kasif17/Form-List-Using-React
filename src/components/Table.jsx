@@ -44,15 +44,15 @@ const Table = ({ onCreateUserClick }) => {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
+    <div className="p-6 bg-gray-800 text-gray-200 rounded-lg shadow-lg">
       <div className="flex flex-col sm:flex-row sm:justify-between items-center mb-6">
         <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <button className="p-3 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 transition duration-300 ease-in-out">
+          <button className="p-3 bg-gray-700 text-gray-200 rounded-lg shadow-md hover:bg-gray-600 transition duration-300 ease-in-out">
             List
           </button>
           <button
             onClick={onCreateUserClick}
-            className="p-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out"
+            className="p-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-400 transition duration-300 ease-in-out"
           >
             Create User
           </button>
@@ -60,7 +60,7 @@ const Table = ({ onCreateUserClick }) => {
         <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
           <button
             onClick={downloadExcel}
-            className="p-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out"
+            className="p-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-400 transition duration-300 ease-in-out"
           >
             Download
           </button>
@@ -69,23 +69,23 @@ const Table = ({ onCreateUserClick }) => {
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-3 border border-gray-300 rounded-lg shadow-sm flex-grow focus:ring-2 focus:ring-blue-400 transition duration-300 ease-in-out"
+            className="p-3 border border-gray-600 bg-gray-700 text-gray-200 rounded-lg shadow-sm flex-grow focus:ring-2 focus:ring-blue-400 transition duration-300 ease-in-out"
           />
-          <button className="p-3 bg-yellow-600 text-white rounded-lg shadow-md hover:bg-yellow-700 transition duration-300 ease-in-out">
+          <button className="p-3 bg-yellow-500 text-white rounded-lg shadow-md hover:bg-yellow-400 transition duration-300 ease-in-out">
             Show All
           </button>
         </div>
       </div>
 
-      <div className="overflow-x-auto bg-gray-50 rounded-lg shadow-lg">
+      <div className="overflow-x-auto bg-gray-700 rounded-lg shadow-lg">
         <table className="min-w-full border-collapse">
-          <thead className="bg-gray-100 border-b">
+          <thead className="bg-gray-600 border-b border-gray-700">
             <tr>
               {Object.keys(data[0]).map((key) => (
                 <th
                   key={key}
                   onClick={() => requestSort(key)}
-                  className="border p-3 text-left cursor-pointer hover:bg-gray-200 transition duration-300 ease-in-out"
+                  className="border p-3 text-left cursor-pointer hover:bg-gray-500 transition duration-300 ease-in-out text-gray-300"
                 >
                   {key} {sortConfig && sortConfig.key === key && (
                     sortConfig.direction === 'ascending' ? '↑' : '↓'
@@ -96,9 +96,9 @@ const Table = ({ onCreateUserClick }) => {
           </thead>
           <tbody>
             {paginatedData.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-100 transition duration-300 ease-in-out">
+              <tr key={index} className="hover:bg-gray-600 transition duration-300 ease-in-out">
                 {Object.values(item).map((val, i) => (
-                  <td key={i} className="border p-3">{val}</td>
+                  <td key={i} className="border p-3 text-gray-200">{val}</td>
                 ))}
               </tr>
             ))}
@@ -112,7 +112,7 @@ const Table = ({ onCreateUserClick }) => {
             <button
               key={page}
               onClick={() => handlePageChange(page)}
-              className={`p-3 rounded-lg shadow-md transition duration-300 ease-in-out ${currentPage === page ? 'bg-blue-600 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+              className={`p-3 rounded-lg shadow-md transition duration-300 ease-in-out ${currentPage === page ? 'bg-blue-500 text-white' : 'bg-gray-600 text-gray-200 hover:bg-gray-500'}`}
             >
               {page}
             </button>
@@ -124,5 +124,3 @@ const Table = ({ onCreateUserClick }) => {
 };
 
 export default Table;
-
-
