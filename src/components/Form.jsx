@@ -18,105 +18,124 @@ const Form = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-      <div className="w-full max-w-4xl mx-auto p-8 bg-gray-800 text-white rounded-lg shadow-lg relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
+      <div className="w-full max-w-6xl mx-auto p-6 md:p-10 bg-gray-900 text-white rounded-lg shadow-2xl relative overflow-y-auto max-h-full">
         <button
-          className="absolute top-4 right-4 text-white text-xl"
+          className="absolute top-4 right-4 text-white text-2xl"
           onClick={onClose}
         >
           &times;
         </button>
-        <h2 className="text-3xl font-bold mb-6 text-center">Create User</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h2 className="text-4xl font-bold mb-8 text-center">Create User</h2>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           <div className="mb-4">
-            <label className="block text-gray-300 font-semibold">Name</label>
+            <label className="block text-gray-400 font-semibold">Name</label>
             <input
               type="text"
               {...register('name', { required: true })}
               className={`w-full p-3 border-2 ${
                 errors.name ? 'border-red-500' : 'border-transparent'
-              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500`}
+              } rounded-lg mt-1 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500`}
               placeholder="Enter your name"
             />
-            {errors.name && <p className="text-red-500 text-sm mt-1">Name is required</p>}
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">Name is required</p>
+            )}
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-300 font-semibold">Email</label>
+            <label className="block text-gray-400 font-semibold">Email</label>
             <input
               type="email"
               {...register('email', { required: true })}
               className={`w-full p-3 border-2 ${
                 errors.email ? 'border-red-500' : 'border-transparent'
-              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } rounded-lg mt-1 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500`}
               placeholder="Enter your email"
             />
-            {errors.email && <p className="text-red-500 text-sm mt-1">Email is required</p>}
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">Email is required</p>
+            )}
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-300 font-semibold">Phone</label>
+            <label className="block text-gray-400 font-semibold">Phone</label>
             <input
               type="text"
               {...register('phone', { required: true })}
               className={`w-full p-3 border-2 ${
                 errors.phone ? 'border-red-500' : 'border-transparent'
-              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-green-500`}
+              } rounded-lg mt-1 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-green-500`}
               placeholder="Enter your phone number"
             />
-            {errors.phone && <p className="text-red-500 text-sm mt-1">Phone is required</p>}
+            {errors.phone && (
+              <p className="text-red-500 text-sm mt-1">Phone is required</p>
+            )}
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-300 font-semibold">Website</label>
+            <label className="block text-gray-400 font-semibold">Website</label>
             <input
               type="text"
               {...register('website', { required: true })}
               className={`w-full p-3 border-2 ${
                 errors.website ? 'border-red-500' : 'border-transparent'
-              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+              } rounded-lg mt-1 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500`}
               placeholder="Enter your website"
             />
-            {errors.website && <p className="text-red-500 text-sm mt-1">Website is required</p>}
+            {errors.website && (
+              <p className="text-red-500 text-sm mt-1">Website is required</p>
+            )}
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-300 font-semibold">Industry</label>
+            <label className="block text-gray-400 font-semibold">Industry</label>
             <input
               type="text"
               {...register('Industry', { required: true })}
               className={`w-full p-3 border-2 ${
                 errors.Industry ? 'border-red-500' : 'border-transparent'
-              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-500`}
+              } rounded-lg mt-1 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-pink-500`}
               placeholder="Enter your industry"
             />
-            {errors.Industry && <p className="text-red-500 text-sm mt-1">Industry is required</p>}
+            {errors.Industry && (
+              <p className="text-red-500 text-sm mt-1">Industry is required</p>
+            )}
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-300 font-semibold">Account Status</label>
+            <label className="block text-gray-400 font-semibold">Account Status</label>
             <input
               type="text"
               {...register('Account_Status', { required: true })}
               className={`w-full p-3 border-2 ${
                 errors.Account_Status ? 'border-red-500' : 'border-transparent'
-              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500`}
+              } rounded-lg mt-1 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-red-500`}
               placeholder="Enter your account status"
             />
-            {errors.Account_Status && <p className="text-red-500 text-sm mt-1">Account Status is required</p>}
+            {errors.Account_Status && (
+              <p className="text-red-500 text-sm mt-1">
+                Account Status is required
+              </p>
+            )}
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-300 font-semibold">Remark</label>
+            <label className="block text-gray-400 font-semibold">Remark</label>
             <input
               type="text"
               {...register('Remark', { required: true })}
               className={`w-full p-3 border-2 ${
                 errors.Remark ? 'border-red-500' : 'border-transparent'
-              } rounded-lg mt-1 bg-gray-700 text-white shadow-inner focus:outline-none focus:ring-2 focus:ring-orange-500`}
+              } rounded-lg mt-1 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-orange-500`}
               placeholder="Enter your remark"
             />
-            {errors.Remark && <p className="text-red-500 text-sm mt-1">Remark is required</p>}
+            {errors.Remark && (
+              <p className="text-red-500 text-sm mt-1">Remark is required</p>
+            )}
           </div>
 
           <button
@@ -132,4 +151,3 @@ const Form = ({ onClose }) => {
 };
 
 export default Form;
-
